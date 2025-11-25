@@ -1,0 +1,23 @@
+name: Deploy to GitHub Pages
+on:push:branches:- mainworkflow_dispatch:
+jobs:build-and-deploy:runs-on: ubuntu-lateststeps:
+- name: Checkout 
+  uses: actions/checkout@v4
+
+- name: Setup Node.js
+  uses: actions/setup-node@v4
+  with:
+    node-version: '20' 
+
+- name: Install dependencies 
+  run: npm install
+
+- name: Deploy to GitHub Pages
+  run: |
+    npm run build
+    npm install gh-pages
+    npx gh-pages -d build --repo https://github.com/${{ github.repository }}.git --user "github-actions[bot] <github-actions@users.noreply.github.com>"
+  env:
+    # El token GITHUB_TOKEN es proporcionado automáticamente por GitHub
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
