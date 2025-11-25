@@ -1,6 +1,16 @@
 name: Deploy to GitHub Pages
-on:push:branches:- mainworkflow_dispatch:
-jobs:build-and-deploy:runs-on:ubuntu-lateststeps:
+
+on:
+
+push:
+
+branches:- main
+
+workflow_dispatch:
+
+jobs:
+
+build-and-deploy:runs-on:ubuntu-lateststeps:
 - name: Checkout 
   uses: actions/checkout@v4
 
